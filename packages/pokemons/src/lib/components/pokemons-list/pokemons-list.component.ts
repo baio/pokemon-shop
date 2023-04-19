@@ -6,17 +6,9 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { Pokemon, PokemonBase } from '../models/pokemon.model';
-import {
-  BehaviorSubject,
-  Observable,
-  combineLatest,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs';
-import { PokemonsDataAccessService } from '../services/pokemons.data-access.service';
-import { PokemonsList } from '../models/pokemons-list.model';
+import { BehaviorSubject, Observable, combineLatest, switchMap } from 'rxjs';
+import { PokemonsDataAccessService } from '../../services/pokemons.data-access.service';
+import { PokemonsList } from '../../models/pokemons-list.model';
 
 @Component({
   selector: 'tambo-pokemons-list',

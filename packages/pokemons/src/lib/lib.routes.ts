@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { PokemonsListComponent } from './pokemons-list/pokemons-list.component';
-import { PokemonItemComponent } from './pokemon-item/pokemon-item.component';
+import { PokemonsListComponent } from './components/pokemons-list/pokemons-list.component';
+import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 
 export const pokemonsRoutes: Route[] = [
   {

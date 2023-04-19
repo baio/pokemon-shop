@@ -1,11 +1,11 @@
 <nz-table
+  #table
   *ngIf="list$ | async as list"
   nzShowPagination
   nzShowSizeChanger
   [nzData]="list.items"
   [nzTotal]="list.count"
-  [nzFrontPagination]="false"
-  #table
+  [nzFrontPagination]="false"  
   (nzPageIndexChange)="onPageIndexChanged($event)"
   (nzPageSizeChange)="onPageSizeChanged($event)"
 >
