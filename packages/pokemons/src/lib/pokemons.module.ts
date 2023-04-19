@@ -4,6 +4,7 @@ import { pokemonsRoutes } from './lib.routes';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { pokemonsReducer } from './store/pokemons.reducer';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @NgModule({
   imports: [

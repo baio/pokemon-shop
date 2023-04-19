@@ -19,7 +19,10 @@
           "packages/pokemon-shop/src/favicon.ico",
           "packages/pokemon-shop/src/assets"
         ],
-        "styles": ["packages/pokemon-shop/src/styles.css"],
+        "styles": [
+          "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css", 
+          "packages/pokemon-shop/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {

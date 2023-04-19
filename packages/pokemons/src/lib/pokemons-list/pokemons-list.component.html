@@ -1,1 +1,24 @@
-<p>pokemons-list works!</p>
+<nz-table
+  *ngIf="list$ | async as list"
+  nzShowPagination
+  nzShowSizeChanger
+  [nzData]="list.items"
+  [nzTotal]="list.count"
+  [nzFrontPagination]="false"
+  #table
+  (nzPageIndexChange)="onPageIndexChanged($event)"
+  (nzPageSizeChange)="onPageSizeChanged($event)"
+>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of table.data">
+      <td>{{ data.name }}</td>
+      <td>{{ data.imageUrl }}</td>
+    </tr>
+  </tbody>
+</nz-table>
