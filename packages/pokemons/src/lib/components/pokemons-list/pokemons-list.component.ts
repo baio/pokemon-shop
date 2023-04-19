@@ -1,14 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { BehaviorSubject, Observable, combineLatest, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  combineLatest,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { PokemonsDataAccessService } from '../../services/pokemons.data-access.service';
 import { PokemonsList } from '../../models/pokemons-list.model';
+import { Store } from '@ngrx/store';
+import { itemsLoaded } from '../../store/pokemons.actions';
 
 @Component({
   selector: 'tambo-pokemons-list',
@@ -24,11 +27,12 @@ export class PokemonsListComponent {
 
   readonly list$: Observable<PokemonsList>;
 
-  constructor(dataAccess: PokemonsDataAccessService) {
+  constructor(dataAccess: PokemonsDataAccessService, store: Store) {
     this.list$ = combineLatest([this.pageIndex$, this.pageSize$]).pipe(
       switchMap(([pageIndex, pageSize]) =>
         dataAccess.getList(pageIndex, pageSize)
-      )
+      ),
+      tap(({ items }) => store.dispatch(itemsLoaded({ items })))
     );
   }
 
