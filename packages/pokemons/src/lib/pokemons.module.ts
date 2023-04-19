@@ -4,7 +4,8 @@ import { pokemonsRoutes } from './lib.routes';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { pokemonsReducer } from './store/pokemons.reducer';
-import { NzTableModule } from 'ng-zorro-antd/table';
+import { EffectsModule } from '@ngrx/effects';
+import { PokemonsEffects } from './store/pokemons.effects';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     RouterModule.forChild(pokemonsRoutes),
     RouterModule,
     StoreModule.forFeature('pokemons', pokemonsReducer),
+    EffectsModule.forFeature([PokemonsEffects]),
   ],
 })
 export class PokemonsModule {}

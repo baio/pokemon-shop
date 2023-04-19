@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pokemon, PokemonBase } from '../models/pokemon.model';
+import { Pokemon, PokemonBase, PokemonName } from '../models/pokemon.model';
 import { Observable, map } from 'rxjs';
 import { PokemonsList } from '../models/pokemons-list.model';
 
@@ -19,6 +19,11 @@ interface ResultDto {
 @Injectable({ providedIn: 'root' })
 export class PokemonsDataAccessService {
   constructor(private readonly http: HttpClient) {}
+
+  getItem(name: PokemonName): Observable<Pokemon> {
+    // TODO: base url through config
+    return this.http.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  }
 
   getList(pageIndex: number, pageSize: number): Observable<PokemonsList> {
     // TODO: base url through config

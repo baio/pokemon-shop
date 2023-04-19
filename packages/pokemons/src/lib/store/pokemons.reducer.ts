@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { PokemonsState } from '../models/pokemons-state.model';
-import { itemsLoaded } from './pokemons.actions';
+import { itemsLoaded, pokemonLoaded } from './pokemons.actions';
 import { fromPairs } from 'lodash/fp';
 
 export const initialState: PokemonsState = {};
@@ -15,5 +15,9 @@ const onItemLoaded = (
 
 export const pokemonsReducer = createReducer(
   initialState,
-  on(itemsLoaded, onItemLoaded)
+  on(itemsLoaded, onItemLoaded),
+  on(pokemonLoaded, (state, { pokemon }) => ({
+    ...state,
+    [pokemon.name]: pokemon,
+  }))
 );
