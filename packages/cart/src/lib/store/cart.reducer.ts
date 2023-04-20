@@ -1,6 +1,12 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { CartState } from '../models/cart-state.model';
+import { addToCart, removeFromCart } from './cart.actions';
+import { omit } from 'lodash/fp';
 
 export const initialState: CartState = {};
 
-export const cartReducer = createReducer(initialState);
+export const cartReducer = createReducer(
+  initialState,
+  on(addToCart, (state, { name }) => ({ ...state, [name]: true })),
+  on(removeFromCart, (state, { name }) => omit(name, state))
+);

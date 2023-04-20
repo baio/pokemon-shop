@@ -14,6 +14,7 @@
       <th>Name</th>
       <th>Image</th>
       <th>Price</th>
+      <th>Cart</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,22 @@
         <img *ngIf="data.imageUrl; else emptyImage" [src]="data.imageUrl" />
       </td>
       <td>{{ data.price || 'loading...' }}</td>
+      <td>
+        <button
+          *ngIf="data.isInCart"
+          nz-button
+          (click)="onRemoveFromCart(data)"
+          nzDanger
+        >
+          <span nz-icon nzType="delete" nzTheme="outline"></span>
+          Remove from cart
+        </button>
+
+        <button *ngIf="!data.isInCart" nz-button (click)="onAddToCart(data)">
+          <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+          Add to cart
+        </button>
+      </td>
     </tr>
   </tbody>
 </nz-table>

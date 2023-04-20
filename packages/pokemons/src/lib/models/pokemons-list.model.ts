@@ -1,6 +1,6 @@
-import { Pokemon, PokemonBase } from './pokemon.model';
+import { Pokemon } from './pokemon.model';
 
-export interface PokemonsList {
+export interface PokemonsList<T extends Pokemon = Pokemon> {
   count: number;
-  items: Pokemon[];
+  items: T[];
 }
