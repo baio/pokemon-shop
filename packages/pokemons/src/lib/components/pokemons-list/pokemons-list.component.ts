@@ -65,7 +65,7 @@ export class PokemonsListComponent {
         count: list.count,
         items: list.items.map((m) => ({
           ...(state[m.name] || m),
-          isInCart: !!cart[m.name],
+          isInCart: !!(cart && cart[m.name]),
         })),
       }))
     );

@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { pluck, sortBy, toPairs } from 'lodash/fp';
 import { CartState } from './models/cart-state.model';
-import { PokemonsState, selectPokemons } from '@tambo/store/pokemons';
+import { Pokemon, PokemonsState, selectPokemons } from '@tambo/store/pokemons';
 import { PokemonName } from '@tambo/shared';
 
 export const selectCart = createFeatureSelector<CartState>('cart');
@@ -12,7 +12,7 @@ export const selectCartAsList = createSelector(selectCart, (state) =>
 
 export const selectCartAsSortedList = createSelector(selectCart, (state) => {
   const list = toPairs(state || {});
-  const ordered = sortBy((x) => x[1], list);
+  const ordered = sortBy((x) => x[1] * -1, list);
   const result = pluck(0, ordered);
   return result;
 });
@@ -42,4 +42,15 @@ export const selectCartSummary = createSelector(
   selectPokemons,
   selectCartAsList,
   reduceCartSummary
+);
+
+const mapCartPokemons = (
+  pokemons: PokemonsState,
+  cartList: PokemonName[]
+): Pokemon[] => cartList.map((m) => pokemons[m] || ({ name: m } as Pokemon));
+
+export const selectCartPokemons = createSelector(
+  selectPokemons,
+  selectCartAsSortedList,
+  mapCartPokemons
 );
