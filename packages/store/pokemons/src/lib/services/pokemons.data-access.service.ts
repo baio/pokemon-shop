@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pokemon } from '../models/pokemon.model';
 import { Observable, map } from 'rxjs';
-import { PokemonsList } from '../models/pokemons-list.model';
 import { ItemDto } from './dto/item.dto';
 import { ListDto } from './dto/list.dto';
 import { PokemonName } from '@tambo/shared';
+import { Pokemon, PokemonsList } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class PokemonsDataAccessService {

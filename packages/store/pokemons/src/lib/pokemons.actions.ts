@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Pokemon, PokemonBase } from '../models/pokemon.model';
+import { Pokemon, PokemonBase } from './models/pokemon.model';
 import { PokemonName } from '@tambo/shared';
 
 export const loadBasePokemonsSuccess = createAction(

@@ -17,7 +17,9 @@
     "paths": {
       "@tambo/cart": ["packages/cart/src/index.ts"],
       "@tambo/pokemons": ["packages/pokemons/src/index.ts"],
-      "@tambo/shared": ["packages/shared/src/index.ts"]
+      "@tambo/shared": ["packages/shared/src/index.ts"],
+      "@tambo/store/cart": ["packages/store/cart/src/index.ts"],
+      "@tambo/store/pokemons": ["packages/store/pokemons/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -2,18 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { pokemonsRoutes } from './lib.routes';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
-import { pokemonsReducer } from './store/pokemons.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { PokemonsEffects } from './store/pokemons.effects';
+import { StorePokemonsModule } from '@tambo/store/pokemons';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(pokemonsRoutes),
     RouterModule,
-    StoreModule.forFeature('pokemons', pokemonsReducer),
-    EffectsModule.forFeature([PokemonsEffects]),
+    StorePokemonsModule,
   ],
 })
 export class PokemonsModule {}

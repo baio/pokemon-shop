@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, withLatestFrom, mergeMap } from 'rxjs/operators';
-import { PokemonsDataAccessService } from '../services/pokemons.data-access.service';
+
 import {
   enrichPokemons,
   loadBasePokemonsSuccess,
@@ -12,7 +12,8 @@ import {
 } from './pokemons.actions';
 import { Store } from '@ngrx/store';
 import { selectPokemons } from './pokemons.selectors';
-import { Pokemon } from '../models/pokemon.model';
+import { Pokemon } from './models';
+import { PokemonsDataAccessService } from './services/pokemons.data-access.service';
 
 const isPokemonEnriched = (pokemon: Pokemon) => !!pokemon.imageUrl;
 

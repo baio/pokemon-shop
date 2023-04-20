@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { PokemonsState } from '../models/pokemons-state.model';
+import { PokemonsState } from './models/pokemons-state.model';
 import {
   enrichPokemons,
   loadBasePokemonsSuccess,

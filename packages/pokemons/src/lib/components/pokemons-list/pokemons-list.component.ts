@@ -9,15 +9,17 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { PokemonsDataAccessService } from '../../services/pokemons.data-access.service';
-import { PokemonsList } from '../../models/pokemons-list.model';
 import { Store } from '@ngrx/store';
-import { loadBasePokemonsSuccess } from '../../store/pokemons.actions';
-import { Pokemon } from '../../models/pokemon.model';
-import { selectPokemons } from '../../store/pokemons.selectors';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { addToCart, removeFromCart, selectCart } from '@tambo/cart';
+import {
+  Pokemon,
+  PokemonsDataAccessService,
+  PokemonsList,
+  loadBasePokemonsSuccess,
+  selectPokemons,
+} from '@tambo/store/pokemons';
+import { addToCart, removeFromCart, selectCart } from '@tambo/store/cart';
 
 export interface PokemonRow extends Pokemon {
   isInCart: boolean;

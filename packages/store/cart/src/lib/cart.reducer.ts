@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { CartState } from '../models/cart-state.model';
+import { CartState } from './models/cart-state.model';
 import { addToCart, removeFromCart } from './cart.actions';
 import { omit } from 'lodash/fp';
 

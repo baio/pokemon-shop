@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { pluck, sortBy, toPairs } from 'lodash/fp';
-import { CartState } from '../models/cart-state.model';
+import { CartState } from './models/cart-state.model';
 
 export const selectCart = createFeatureSelector<CartState>('cart');
 
