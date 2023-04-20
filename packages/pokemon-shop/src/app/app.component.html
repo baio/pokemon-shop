@@ -9,6 +9,9 @@
     <a [routerLink]="['/', 'cart']">
       <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
       Cart
+      <ng-container *ngIf="cartSummary$ | async as cartSummary">
+        items count: {{ cartSummary.count }} / amount: {{ cartSummary.amount }}
+      </ng-container>
     </a>
   </li>
 </ul>

@@ -7,6 +7,6 @@ export const initialState: CartState = {};
 
 export const cartReducer = createReducer(
   initialState,
-  on(addToCart, (state, { name }) => ({ ...state, [name]: true })),
+  on(addToCart, (state, { name, date }) => ({ ...state, [name]: date })),
   on(removeFromCart, (state, { name }) => omit(name, state))
 );

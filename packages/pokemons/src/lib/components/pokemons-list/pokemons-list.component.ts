@@ -80,7 +80,9 @@ export class PokemonsListComponent {
   }
 
   onAddToCart(pokemon: Pokemon) {
-    return this.store.dispatch(addToCart({ name: pokemon.name }));
+    return this.store.dispatch(
+      addToCart({ name: pokemon.name, date: new Date().getTime() })
+    );
   }
 
   onRemoveFromCart(pokemon: Pokemon) {

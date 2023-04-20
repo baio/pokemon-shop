@@ -1,3 +1,3 @@
-import { PokemonName } from '@tambo/shared';
+import { DateTime, PokemonName } from '@tambo/shared';
 
-export type CartState = Record<PokemonName, true>;
+export type CartState = Record<PokemonName, DateTime>;
