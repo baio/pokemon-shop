@@ -1,9 +1,8 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CartSummary, selectCartSummary } from '@tambo/store/pokemons';
+import { CartSummary, selectCartSummary } from '@tambo/store/cart';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { Observable } from 'rxjs';
