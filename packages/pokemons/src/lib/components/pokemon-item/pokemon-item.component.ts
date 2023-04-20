@@ -9,12 +9,12 @@ import {
   selectPokemons,
 } from '@tambo/store/pokemons';
 import { ActivatedRoute, Router } from '@angular/router';
-import { selectCart } from '@tambo/store/cart';
+import {
+  PokemonInCart,
+  selectCart,
+  selectPokemonInCart,
+} from '@tambo/store/cart';
 import { NzCardModule } from 'ng-zorro-antd/card';
-
-export interface PokemonInCart extends Pokemon {
-  isInCart: boolean;
-}
 
 @Component({
   selector: 'tambo-pokemon-item',
@@ -37,20 +37,9 @@ export class PokemonItemComponent {
       })
     );
 
-    const pokemon$ = pokemonName$.pipe(
+    this.pokemon$ = pokemonName$.pipe(
       switchMap((name) =>
-        name
-          ? store
-              .select(selectPokemon(name))
-              .pipe(map((pokemon) => pokemon || ({ name } as Pokemon)))
-          : of(null)
-      )
-    );
-    // merge data from just loaded list and enriched items from state (since they load separately)
-    this.pokemon$ = combineLatest([pokemon$, store.select(selectCart)]).pipe(
-      map(
-        ([pokemon, cart]) =>
-          pokemon && { ...pokemon, isInCart: !!(cart && cart[pokemon.name]) }
+        name ? store.select(selectPokemonInCart(name)) : of(null)
       )
     );
   }

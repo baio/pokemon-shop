@@ -19,12 +19,14 @@ import {
   loadBasePokemonsSuccess,
   selectPokemons,
 } from '@tambo/store/pokemons';
-import { addToCart, removeFromCart, selectCart } from '@tambo/store/cart';
+import {
+  PokemonInCart,
+  addToCart,
+  getPokemonInCart,
+  removeFromCart,
+  selectCart,
+} from '@tambo/store/cart';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-
-export interface PokemonInCart extends Pokemon {
-  isInCart: boolean;
-}
 
 export type List = PokemonsList<PokemonInCart>;
 
@@ -72,10 +74,9 @@ export class PokemonsListComponent {
     ]).pipe(
       map(([list, state, cart]) => ({
         count: list.count,
-        items: list.items.map((m) => ({
-          ...(state[m.name] || m),
-          isInCart: !!(cart && cart[m.name]),
-        })),
+        items: list.items.map((m) =>
+          getPokemonInCart(state[m.name] || m, cart)
+        ),
       }))
     );
   }
