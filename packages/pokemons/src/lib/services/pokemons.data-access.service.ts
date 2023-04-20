@@ -1,20 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pokemon, PokemonBase, PokemonName } from '../models/pokemon.model';
+import { Pokemon, PokemonName } from '../models/pokemon.model';
 import { Observable, map } from 'rxjs';
 import { PokemonsList } from '../models/pokemons-list.model';
-
-interface PokemonsListDto {
-  count: number;
-  next: string;
-  previous: null;
-  results: ResultDto[];
-}
-
-interface ResultDto {
-  name: string;
-  url: string;
-}
+import { ItemDto } from './dto/item.dto';
+import { ListDto } from './dto/list.dto';
 
 @Injectable({ providedIn: 'root' })
 export class PokemonsDataAccessService {
@@ -22,18 +12,30 @@ export class PokemonsDataAccessService {
 
   getItem(name: PokemonName): Observable<Pokemon> {
     // TODO: base url through config
-    return this.http.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    return this.http
+      .get<ItemDto>(`https://pokeapi.co/api/v2/pokemon/${name}`)
+      .pipe(
+        map((m) => ({
+          name: m.name,
+          imageUrl: m.sprites.front_default,
+          // make price proportional to experience
+          price: m.base_experience * 100,
+        }))
+      );
   }
 
   getList(pageIndex: number, pageSize: number): Observable<PokemonsList> {
     // TODO: base url through config
     return this.http
-      .get<PokemonsListDto>(
+      .get<ListDto>(
         `https://pokeapi.co/api/v2/pokemon?offset=${pageIndex}&limit=${pageSize}`
       )
       .pipe(
-        // as Pokemon - pretend for type system all data already in result
-        map(({ count, results }) => ({ count, items: results as Pokemon[] }))
+        map(({ count, results }) => ({
+          count,
+          // as Pokemon - pretend for type system all data already in result
+          items: results as unknown as Pokemon[],
+        }))
       );
   }
 }

@@ -5,7 +5,7 @@
   nzShowSizeChanger
   [nzData]="list.items"
   [nzTotal]="list.count"
-  [nzFrontPagination]="false"  
+  [nzFrontPagination]="false"
   (nzPageIndexChange)="onPageIndexChanged($event)"
   (nzPageSizeChange)="onPageSizeChanged($event)"
 >
@@ -13,12 +13,17 @@
     <tr>
       <th>Name</th>
       <th>Image</th>
+      <th>Price</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of table.data">
+    <tr *ngFor="let data of table.data; trackBy: trackByRow">
       <td>{{ data.name }}</td>
-      <td>{{ data.imageUrl }}</td>
+      <td>
+        <img *ngIf="data.imageUrl; else emptyImage" [src]="data.imageUrl" />
+      </td>
+      <td>{{ data.price || 'loading...' }}</td>
     </tr>
   </tbody>
 </nz-table>
+<ng-template #emptyImage> Loading... </ng-template>
