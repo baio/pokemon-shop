@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Pokemon, PokemonBase, PokemonName } from '../models/pokemon.model';
+import { Pokemon, PokemonBase } from '../models/pokemon.model';
 
 // List of slim items loaded
 export const itemsLoaded = createAction(

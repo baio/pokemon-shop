@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@tambo/cart": ["packages/cart/src/index.ts"],
-      "@tambo/pokemons": ["packages/pokemons/src/index.ts"]
+      "@tambo/pokemons": ["packages/pokemons/src/index.ts"],
+      "@tambo/shared": ["packages/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,5 +1,4 @@
-export type PokemonName = string;
-export type Price = number;
+import { PokemonName, Price } from '@tambo/shared';
 
 export interface PokemonBase {
   name: PokemonName;
