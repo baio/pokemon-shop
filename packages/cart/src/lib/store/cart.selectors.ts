@@ -5,11 +5,11 @@ import { CartState } from '../models/cart-state.model';
 export const selectCart = createFeatureSelector<CartState>('cart');
 
 export const selectCartAsList = createSelector(selectCart, (state) =>
-  Object.keys(state)
+  state ? Object.keys(state) : []
 );
 
 export const selectCartAsSortedList = createSelector(selectCart, (state) => {
-  const list = toPairs(state);
+  const list = toPairs(state || {});
   const ordered = sortBy((x) => x[1], list);
   const result = pluck(0, ordered);
   return result;
