@@ -27,21 +27,22 @@ export class PokemonItemComponent {
   readonly pokemon$: Observable<PokemonInCart | null>;
 
   constructor(store: Store, activatedRoute: ActivatedRoute) {
-    const pokemonName$ = activatedRoute.paramMap
-      .pipe(map((m) => m.get('id')))
-      .pipe(tap(console.log));
+    const pokemonName$ = activatedRoute.paramMap.pipe(
+      map((m) => m.get('id')),
+      tap((name) => {
+        if (name) {
+          // enrich pokemon data if necessary
+          store.dispatch(enrichPokemons({ names: [name] }));
+        }
+      })
+    );
 
     const pokemon$ = pokemonName$.pipe(
       switchMap((name) =>
         name
-          ? store.select(selectPokemon(name)).pipe(
-              tap((pokemon) => {
-                if (!pokemon || !pokemon.imageUrl) {
-                  store.dispatch(enrichPokemons({ names: [name] }));
-                }
-              }),
-              map((pokemon) => pokemon || ({ name } as Pokemon))
-            )
+          ? store
+              .select(selectPokemon(name))
+              .pipe(map((pokemon) => pokemon || ({ name } as Pokemon)))
           : of(null)
       )
     );
