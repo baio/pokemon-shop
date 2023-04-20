@@ -20,17 +20,24 @@ import {
   selectPokemons,
 } from '@tambo/store/pokemons';
 import { addToCart, removeFromCart, selectCart } from '@tambo/store/cart';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
-export interface PokemonRow extends Pokemon {
+export interface PokemonInCart extends Pokemon {
   isInCart: boolean;
 }
 
-export type List = PokemonsList<PokemonRow>;
+export type List = PokemonsList<PokemonInCart>;
 
 @Component({
   selector: 'tambo-pokemons-list',
   standalone: true,
-  imports: [CommonModule, NzTableModule, NzButtonModule, NzIconModule],
+  imports: [
+    CommonModule,
+    NzTableModule,
+    NzButtonModule,
+    NzIconModule,
+    RouterModule,
+  ],
   templateUrl: './pokemons-list.component.html',
   styleUrls: ['./pokemons-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,7 +51,9 @@ export class PokemonsListComponent {
 
   constructor(
     dataAccess: PokemonsDataAccessService,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute
   ) {
     const list$ = combineLatest([this.pageIndex$, this.pageSize$]).pipe(
       switchMap(([pageIndex, pageSize]) =>
@@ -91,5 +100,11 @@ export class PokemonsListComponent {
 
   onRemoveFromCart(pokemon: Pokemon) {
     return this.store.dispatch(removeFromCart({ name: pokemon.name }));
+  }
+
+  onRowClick(pokemon: Pokemon) {
+    this.router.navigate(['.', pokemon.name], {
+      relativeTo: this.activatedRoute,
+    });
   }
 }

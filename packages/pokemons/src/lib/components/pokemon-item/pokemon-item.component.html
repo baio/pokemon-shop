@@ -1,1 +1,8 @@
-<p>pokemon-item works!</p>
+<nz-card *ngIf="pokemon$ | async as pokemon; else loading">
+  <p>{{ pokemon.name }}</p>
+  <img *ngIf="pokemon.imageUrl; else emptyImage" [src]="pokemon.imageUrl" />
+  <p>{{ pokemon.price || 'Loading...' }}</p>
+</nz-card>
+
+<ng-template #loading>Loading...</ng-template>
+<ng-template #emptyImage> Loading... </ng-template>
