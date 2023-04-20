@@ -1,21 +1,20 @@
 import { createAction, props } from '@ngrx/store';
 import { Pokemon, PokemonBase } from '../models/pokemon.model';
+import { PokemonName } from '@tambo/shared';
 
-// List of slim items loaded
-export const itemsLoaded = createAction(
-  '[Pokemons] Items Loaded',
-  props<{ items: PokemonBase[] }>()
+export const loadBasePokemonsSuccess = createAction(
+  '[Pokemons] Load Base Pokemons Success',
+  props<{ pokemons: PokemonBase[] }>()
 );
 
-// Load list of enriched items
-export const loadPokemons = createAction(
-  '[Pokemons] Load Pokemons',
-  props<{ pokemons: PokemonBase[] }>()
+export const enrichPokemons = createAction(
+  '[Pokemons] Enrich Pokemons',
+  props<{ names: PokemonName[] }>()
 );
 
 export const loadPokemon = createAction(
   '[Pokemons] Load Pokemon',
-  props<{ pokemon: PokemonBase }>()
+  props<{ name: PokemonName }>()
 );
 
 export const pokemonLoaded = createAction(
@@ -25,5 +24,5 @@ export const pokemonLoaded = createAction(
 
 export const pokemonLoadFailure = createAction(
   '[Pokemons] Pokemon Load Failure',
-  props<{ pokemon: PokemonBase }>()
+  props<{ name: PokemonName }>()
 );

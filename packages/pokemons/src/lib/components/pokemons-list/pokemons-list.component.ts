@@ -12,7 +12,7 @@ import {
 import { PokemonsDataAccessService } from '../../services/pokemons.data-access.service';
 import { PokemonsList } from '../../models/pokemons-list.model';
 import { Store } from '@ngrx/store';
-import { itemsLoaded } from '../../store/pokemons.actions';
+import { loadBasePokemonsSuccess } from '../../store/pokemons.actions';
 import { Pokemon } from '../../models/pokemon.model';
 import { selectPokemons } from '../../store/pokemons.selectors';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -48,7 +48,9 @@ export class PokemonsListComponent {
       switchMap(([pageIndex, pageSize]) =>
         dataAccess.getList(pageIndex, pageSize)
       ),
-      tap(({ items }) => store.dispatch(itemsLoaded({ items })))
+      tap(({ items }) =>
+        store.dispatch(loadBasePokemonsSuccess({ pokemons: items }))
+      )
     );
 
     // merge data from just loaded list and enriched items from state (since they load separately)
