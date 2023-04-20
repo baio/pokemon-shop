@@ -11,17 +11,19 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   PokemonInCart,
+  addToCart,
   removeFromCart,
   selectCart,
   selectPokemonInCart,
 } from '@tambo/store/cart';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { CartButtonComponent } from '../cart-button/cart-button.component';
 
 @Component({
   selector: 'tambo-pokemon-item',
   standalone: true,
-  imports: [CommonModule, NzCardModule, NzButtonModule],
+  imports: [CommonModule, NzCardModule, CartButtonComponent],
   templateUrl: './pokemon-item.component.html',
   styleUrls: ['./pokemon-item.component.scss'],
 })
@@ -48,5 +50,11 @@ export class PokemonItemComponent {
 
   onRemoveFromCart(pokemon: Pokemon) {
     return this.store.dispatch(removeFromCart({ name: pokemon.name }));
+  }
+
+  onAddToCart(pokemon: Pokemon) {
+    return this.store.dispatch(
+      addToCart({ name: pokemon.name, date: new Date().getTime() })
+    );
   }
 }
