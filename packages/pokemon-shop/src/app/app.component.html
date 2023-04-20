@@ -1,1 +1,16 @@
+<ul nz-menu nzMode="horizontal">
+  <li nz-menu-item nzMatchRouter>
+    <a [routerLink]="['/', 'pokemons']">
+      <span nz-icon nzType="unordered-list" nzTheme="outline"></span>
+      Pokemons
+    </a>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <a [routerLink]="['/', 'cart']">
+      <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+      Cart
+    </a>
+  </li>
+</ul>
+
 <router-outlet></router-outlet>
