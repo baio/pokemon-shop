@@ -27,19 +27,14 @@ import {
   selectCart,
 } from '@tambo/store/cart';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CartButtonComponent } from '../cart-button/cart-button.component';
 
 export type List = PokemonsList<PokemonInCart>;
 
 @Component({
   selector: 'tambo-pokemons-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    NzTableModule,
-    NzButtonModule,
-    NzIconModule,
-    RouterModule,
-  ],
+  imports: [CommonModule, NzTableModule, RouterModule, CartButtonComponent],
   templateUrl: './pokemons-list.component.html',
   styleUrls: ['./pokemons-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

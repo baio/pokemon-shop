@@ -1,0 +1,9 @@
+<button *ngIf="isInCart" nz-button (click)="remove.emit()" nzDanger>
+  <span nz-icon nzType="delete" nzTheme="outline"></span>
+  Remove from cart
+</button>
+
+<button *ngIf="!isInCart" nz-button (click)="add.emit()">
+  <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+  Add to cart
+</button>

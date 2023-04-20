@@ -2,6 +2,14 @@
   <p>{{ pokemon.name }}</p>
   <img *ngIf="pokemon.imageUrl; else emptyImage" [src]="pokemon.imageUrl" />
   <p>{{ pokemon.price || 'Loading...' }}</p>
+  <button
+    nz-button
+    (click)="onRemoveFromCart(pokemon)"
+    nzDanger
+  >
+    <span nz-icon nzType="delete" nzTheme="outline"></span>
+    Remove from cart
+  </button>
 </nz-card>
 
 <ng-template #loading>Loading...</ng-template>

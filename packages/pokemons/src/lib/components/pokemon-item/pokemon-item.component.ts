@@ -11,22 +11,24 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   PokemonInCart,
+  removeFromCart,
   selectCart,
   selectPokemonInCart,
 } from '@tambo/store/cart';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'tambo-pokemon-item',
   standalone: true,
-  imports: [CommonModule, NzCardModule],
+  imports: [CommonModule, NzCardModule, NzButtonModule],
   templateUrl: './pokemon-item.component.html',
   styleUrls: ['./pokemon-item.component.scss'],
 })
 export class PokemonItemComponent {
   readonly pokemon$: Observable<PokemonInCart | null>;
 
-  constructor(store: Store, activatedRoute: ActivatedRoute) {
+  constructor(private readonly store: Store, activatedRoute: ActivatedRoute) {
     const pokemonName$ = activatedRoute.paramMap.pipe(
       map((m) => m.get('id')),
       tap((name) => {
@@ -42,5 +44,9 @@ export class PokemonItemComponent {
         name ? store.select(selectPokemonInCart(name)) : of(null)
       )
     );
+  }
+
+  onRemoveFromCart(pokemon: Pokemon) {
+    return this.store.dispatch(removeFromCart({ name: pokemon.name }));
   }
 }
